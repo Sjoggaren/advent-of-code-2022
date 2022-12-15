@@ -1,5 +1,5 @@
 from aocd.models import Puzzle
-
+import re
 
 def smaller(x, y, S):
     for (sx, sy, d) in S:
@@ -46,7 +46,8 @@ def find_distress_beacon(sensors):
                 (sx + d + 1 - p, sy + p),
             ):
                 if 0 <= x <= 4000000 and 0 <= y <= 4000000:
-                    further = [abs(x - nx) + abs(y - ny) > nd for nx, ny, nd in sensors]
+                    further = [abs(x - nx) + abs(y - ny) > nd
+                               for nx, ny, nd in sensors]
                     if all(further):
                         return (x * 4000000 + y)
 
@@ -64,6 +65,12 @@ def solvep2(d):
         sy = int(sy[2:-1])
         bx = int(bx[2:-1])
         by = int(by[2:])
+
+        regex = [int(j) for j in re.findall("(\d*\d)", line)]
+        #Mised there was a negative coordinate, this is why i got stuck for 1h 
+        if (regex[2] != bx):
+            print(regex[2], bx)
+
         d = abs(sx - bx) + abs(sy - by)
         sensors.add((sx, sy, d))
         beacons.add((bx, by))
@@ -74,5 +81,5 @@ def solvep2(d):
 puzzle = Puzzle(2022, 15)
 input = puzzle.input_data
 
-print("Answer problem 1:", solvep1(input))
+#print("Answer problem 1:", solvep1(input))
 print("Answer problem 2:", solvep2(input))
