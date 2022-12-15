@@ -67,7 +67,7 @@ def solvep2(d):
         by = int(by[2:])
 
         regex = [int(j) for j in re.findall("(\d*\d)", line)]
-        #Mised there was a negative coordinate, this is why i got stuck for 1h 
+        # Missed there was a negative coordinate, got stuck for 1h
         if (regex[2] != bx):
             print(regex[2], bx)
 
@@ -81,5 +81,5 @@ def solvep2(d):
 puzzle = Puzzle(2022, 15)
 input = puzzle.input_data
 
-#print("Answer problem 1:", solvep1(input))
+print("Answer problem 1:", solvep1(input))
 print("Answer problem 2:", solvep2(input))
